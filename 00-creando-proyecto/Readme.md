@@ -40,8 +40,6 @@ npm install --save-dev prettier-plugin-astro
 
 Y añadimos configuración para prettier en el archivo .prettierrc:
 
-Configuramos Tailwind CSS y creamos un componente de ejemplo.
-
 ./.prettierrc
 
 ```json
@@ -73,30 +71,3 @@ _./src/styles/global.css_
 ```
 
 Y esto lo incluiremos en el layout principal de nuestro proyecto.
-
-# Limpiando
-
-Y ya que estamos limpiamos fichero que no necesitamos:
-
-`./src/assets/astro.svg`
-`./src/assets/background.svg`
-
-`./components/Welcome.astro`
-
-y en `./src/pages/index.astro` actualizamos:
-
-```diff
----
-- import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
----
-
-<Layout>
--	<Welcome />
-+ <h1>Hello Blog !</h1>
-</Layout>
-
-```
