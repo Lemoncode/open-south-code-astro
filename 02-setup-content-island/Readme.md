@@ -1,4 +1,4 @@
-# 02 Listado de cursos básico
+# 02 Setup Content Island (HCMS)
 
 Vamos a mostrar el listado de cursos que tenemos dispoinibles.
 

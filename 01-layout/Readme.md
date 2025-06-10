@@ -79,8 +79,50 @@ _./src/pages/index.astro_
 
 ```diff
 - <Layout>
-+ <Layout title="Listado de Cursos">
++ <Layout title="Campus">
 -  <h1>Astro</h1>
 +  <h1>Listado de Cursos</h1>
  </Layout>
+```
+
+Ya que estamos, vamos a añdir un componente de cabecera, que nos muestre el título de la página y un menú de navegación.
+
+_./src/components/Header.astro_
+
+```astro
+---
+
+---
+
+<header class="bg-white shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-gray-800">Online Campus</h1>
+  </div>
+</header>
+```
+
+Y lo usamos en nuestro layout:
+
+_./src/layouts/Layout.astro_
+
+```diff
+---
+// IMPORTANTE Mencionar esto !!
+import "../styles/global.css";
++ import Header from "../components/Header.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+// (...)
+  <body>
++   <Header />
+    <slot />
+  </body>
+</html>
 ```

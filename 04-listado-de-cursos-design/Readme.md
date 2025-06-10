@@ -1,9 +1,31 @@
-# 03 Listado de cursos diseño
+Vamos a dividir el problema, primero vamos a crear un componente card para mostrar un curso.
 
-Aquí le metemos diseño a la lista de cursos para que tenga buena pinta.
+_./src/training/components/training-card.astro_
 
-Aquí podríamos crear un componente Card para un curso y poner las props
+```typescript
 
-Y ya lo usamos en página principal y sustituimos.
+```
 
-Comentar aquí troncho HTML y tailwind....
+Lo añadims al barrel:
+
+_./src/training/index.ts_
+
+```diff
+
+```
+
+Y vamos a mostrarlo en la página de cursos.
+
+_./src/index.astro_
+
+```diff
+
+```
+
+Y ya que estamos lo mostramos en un contenedor de tipo flex, para que se vean en una cuadrícula.
+
+_./src/index.astro_
+
+```diff
+
+```

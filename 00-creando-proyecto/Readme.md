@@ -62,12 +62,6 @@ Y ya que estamos vamos a instalar Tailwind CSS y configurarlo para que funcione 
 npx astro add tailwind
 ```
 
-Vamos a crear una hoja de estilos global e importar Tailwind CSS.
+Si le damos que si a todo nos crea el global.css y la configración de Tailwind CSS para Astro.
 
-_./src/styles/global.css_
-
-```css
-@import "tailwindcss";
-```
-
-Y esto lo incluiremos en el layout principal de nuestro proyecto.
+Y esto lo incluiremos en el layout principal de nuestro proyecto en el siguiente paso.

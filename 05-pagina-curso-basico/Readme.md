@@ -1,21 +1,52 @@
-# 04 Página curso basico
+# 05 Página curso basico
 
-Aqui explicamos lo de una página por cada curso, y lo del paramtetro slug
+Ahora que tenemos el listado de cursos, vamos a ver cómo hacer una página para cada curso.
 
-Veremos como hacerlo estamos con SSG
+En esta página vamos a mostrar el listado de lecciones, la lección actual en video y una desipcrción del la lección en concreto.
 
-Vamos a poner el modelo.
+> Se podría haber hecho una págia por cada lección para mejor SEO.
 
-Tiramos del API
+Cómo estamos en SSG necesitamos crear una página HTML por cada curso, ¿Cómo hacemos esto? Aquí te puedes sentir como el Dr. Strange y ver todas las posibilidades.
 
-Mostramos los datos en bruto del curso, de momento titulo y descripción.
+¿Cómo hacemos esto? Por un lado le pedimos a la API el listado de cursos, y con getStaticPaths generamos una página por cada curso.
 
-y enlazamos desde el listado de cursos.
+¿Cómo se hace esto?
 
-Ahora paso 2 
+Vamos crearnos una carpeta de `pages/training/` y dentro de esta carpeta creamos un fichero llamado `[slug].astro`.
 
-La lista de videos... hacemos una carga de cada uno.
+Vamos a traernos el modelo (en este caso repito los dos por ser estanco pero se podría haber ocmpartido)
 
-(modelo, api, mapper, etc...)
+_./src/pages/training/training.model.ts_
 
-Y lo mostramos.
+```ts
+
+```
+
+Y ahora la API
+
+_./src/pages/training/training.api.ts_
+
+```ts
+
+```
+
+Y vamos a crear el fichero de la página, generamos una página por cada curso.
+
+_./src/pages/training/[slug].astro_
+
+```astro
+
+```
+
+Si probamos ahora podemos ver que al pinchar en cada curso no lleva a una página que muestra el curso en concreto, pero muy feote :), además nos falta el listado de lecciones.
+
+> Hacer aquí un npm run build
+
+Vamos a cargar esa informacion.
+
+_./src/pages/training/[slug].astro_
+
+```astro
+
+```
+
