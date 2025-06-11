@@ -11,12 +11,14 @@ Para ello creamos un fichero donde se encuentra la página de cursos, y copiamos
 _./src/tranings/training.model.ts_
 
 ```typescript
+import type { Media } from "@content-island/api-client";
+
 export interface Training {
   id: string;
   title: string;
   overview: string;
   slug: string;
-  thumbnail: string;
+  thumbnail: Media;
   lessons: string[];
 }
 ```
