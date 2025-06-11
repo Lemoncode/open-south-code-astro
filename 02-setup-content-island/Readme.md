@@ -30,20 +30,27 @@ Y desde Astro 5, podemos tipar las variables de entorno de esta manera:
 
 ./astro.config.mjs
 
-```ts
-import { defineConfig, envField } from "astro/config";
+```diff
+- import { defineConfig } from 'astro/config';
++ import { defineConfig, envField } from "astro/config";
 
+import tailwindcss from '@tailwindcss/vite';
+
+// https://astro.build/config
 export default defineConfig({
-  env: {
-    schema: {
-      CONTENT_ISLAND_SECRET_TOKEN: envField.string({
-        context: "server",
-        access: "secret",
-        optional: false,
-        default: "INFORM_VALID_TOKEN",
-      }),
-    },
+  vite: {
+    plugins: [tailwindcss()]
   },
++  env: {
++    schema: {
++      CONTENT_ISLAND_SECRET_TOKEN: envField.string({
++        context: "server",
++        access: "secret",
++        optional: false,
++        default: "INFORM_VALID_TOKEN",
++      }),
++    },
++  },
 });
 ```
 
