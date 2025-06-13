@@ -233,11 +233,11 @@ _./src/[slug].astro_
   </script>
 ```
 
-\*\*
-Aquí le metemos diseño e interacción con Youtube,
+Esta solución no es muy elegante, ya que asumimos que los componentes de vídeo y contenido están en el DOM al momento de hacer clic y con la estructura que esperamos, si la página se va a quedar en este complejidad puede ser una solución rápida y efectiva.
 
-OJO Tiramos de plain Vanilla !!!
+En caso de que queraos algo más elaborado tenemos varias opciones:
+  1. **Usar un framework de JavaScript**: Como React, Vue o Svelte, que te permitirán manejar el estado de la aplicación de forma más limpia y reactiva, si queremos seguir con SSG, podemos decirlo que lo use como client:only para que se ejecute en el cliente, pero perdemos el SEO.
 
-Aquí lo suyo es crear componetes ver bien como podemos plantear esto.
+  2. **Utilizar content island en Astro**: Pasamos a modo híbrido y la isla de contenido dinámico la hacemos con un framework como React, Vue o Svelte, que nos permitirá manejar el estado de la aplicación de forma más limpia y reactiva, lo malo de aquí es que ya no podemos trabajar con SSG.
 
-Lo primero vamos
+  3. 
