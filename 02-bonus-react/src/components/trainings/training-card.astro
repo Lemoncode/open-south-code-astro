@@ -1,0 +1,36 @@
+---
+import type { TrainingWithLessons } from "@/api";
+
+export interface Props {
+  training: TrainingWithLessons;
+}
+
+const { training } = Astro.props;
+---
+
+<a
+  href={`/training/${training.slug}/${training.lessons[0].slug}`}
+  class="group block transform transition-transform duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500"
+>
+  <div
+    class="relative bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-300 w-full border border-gray-100"
+  >
+    <div class="overflow-hidden relative">
+      <img
+        src={training.thumbnail.url}
+        alt={training.title}
+        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      >
+      </div>
+    </div>
+
+    <div class="p-5">
+      <h2 class="text-xl font-bold text-gray-900 leading-snug line-clamp-2">
+        {training.title}
+      </h2>
+    </div>
+  </div>
+</a>

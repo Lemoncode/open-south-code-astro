@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TrainingCard from "@/components/trainings/training-card.astro";
+import { getTrainings } from "@/api";
+
+const trainings = await getTrainings();
+---
+
+<Layout title="Listado de Cursos">
+  <div class="container mx-auto px-4">
+    <h1 class="text-2xl font-bold mb-4">Cursos Disponibles</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {trainings.map((training) => <TrainingCard training={training} />)}
+    </div>
+  </div>
+</Layout>
