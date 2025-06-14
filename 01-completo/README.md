@@ -376,7 +376,7 @@ _./src/components/training/lessons-list.astro_
 
 ```astro
 ---
-import type { Lesson } from "./training.model";
+import type { Lesson } from "@/api";
 
 export interface Props {
   lessons: Lesson[];
@@ -394,7 +394,7 @@ const { lessons, trainingSlug, currentLessonSlug } = Astro.props;
   {
     lessons.map((lesson) => (
       <a
-        href={`/training/${trainingSlug}/lesson/${lesson.slug}`}
+        href={`/training/${trainingSlug}/${lesson.slug}`}
         class={`block w-full text-left px-4 py-2 rounded-lg transition text-sm border ${
           lesson.slug === currentLessonSlug
             ? "bg-gray-100 text-blue-600 font-semibold"
@@ -431,24 +431,33 @@ Y ahora vamos a montar la página de lecciones, eliminamos el HTML que teníamos
 
 _./src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
 
+```diff
+---
+import Layout from "@/layouts/Layout.astro";
+import { getTrainings } from "@/api";
++ import VideoComponent from "@/components/training/video.astro";
++ import LessonsComponent from "@/components/training/lessons-list.astro";
++ import LessonContentComponent from "@/components/training/lesson-content.astro";
+```
+
 ```astro
-<Layout title={`${training.title} - ${currentLesson.title}`}>
+<Layout title={`${training.title} - ${currentLesson?.title}`}>
   <div class="max-w-7xl mx-auto px-4 py-8">
     <h1 class="text-4xl font-bold mb-8 text-center">{training.title}</h1>
 
     <div class="grid md:grid-cols-12 gap-6">
       <div class="md:col-span-8">
         <VideoComponent
-          videoUrl={currentLesson.video}
-          title={currentLesson.title}
+          videoUrl={currentLesson?.video ?? ""}
+          title={currentLesson?.title ?? ""}
         />
       </div>
 
       <div class="md:col-span-4">
         <LessonsComponent
-          lessons={lessons}
-          trainingSlug={training.slug}
-          currentLessonSlug={currentLesson.slug}
+          lessons={training.lessons}
+          trainingSlug={training?.slug}
+          currentLessonSlug={currentLesson?.slug}
         />
       </div>
     </div>
@@ -456,7 +465,7 @@ _./src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
     <div
       class="mt-10 bg-white p-6 rounded-2xl shadow-md border border-gray-200"
     >
-      <LessonContentComponent content={currentLesson.content} />
+      <LessonContentComponent content={currentLesson?.content ?? ""} />
     </div>
   </div>
 </Layout>
