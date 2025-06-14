@@ -172,7 +172,7 @@ Lo primero componenntizar la lista de cursos, vamos a crear un componente card q
 
 OJO este componente no lo podemos colocarl debajo de pages porque lo tomaría como una página, así que lo colocamos en `src/components`.
 
-_./src/components/training/training-card.astro_
+_./src/components/trainings/training-card.astro_
 
 ```astro
 ---
@@ -220,7 +220,7 @@ _./src/index.astro_
 ```diff
 ---
 import Layout from "../layouts/Layout.astro";
-+ import TrainingCard from "@/components/training/training-card.component.astro";
++ import TrainingCard from "@/components/trainings/training-card.component.astro";
 import { getTrainings } from "./trainings";
 
 const trainings = await getTrainings();
@@ -241,3 +241,223 @@ Y sustituimos todo el HTML
 ```
 
 Ya lo tenemos, pero si pinchamos en un curso nos da un 404, vamos a por la lista de lecciones.
+
+## Lecciones
+
+### Listado de lecciones sin diseño
+
+Ahora que tenemos el listado de cursos, vamos a ver cómo hacer una página para los cursos, de hecho vamos a hacer varias..., por temas de SEO nos interesa tener una página por cada lección de curso.
+
+Así que vamos a crear la siguiente estructura de carpetas:
+
+```
+src
+└── pages
+    └── training
+        └── [trainingSlug]
+            └── [lessonSlug].astro
+```
+
+¿Qué es eso entre corchetes? Es una forma de definir rutas dinámicas en Astro, es decir, que el nombre del archivo se convierte en una variable que podemos usar dentro del componente.
+
+Así lo que hacemos es crear todas las lecciones de un curso en una misma carpeta, y cada lección será una página diferente, al estar usando SSG (Static Site Generation) se generarán todas las páginas en el momento de la construcción del sitio.
+
+_src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
+
+```astro
+
+```
+
+Ahora nos hace falta hacer como Dr. Strange en infinity War y sacar todas las combinaciones posibles de lecciones y cursos.
+
+Para hacer esto, Astro nos ofrece la función `getStaticPaths`, que nos permite generar todas las rutas posibles para una página dinámica.
+
+_src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
+
+```astro
+---
+import Layout from "@/layouts/Layout.astro";
+import { getTrainings } from "@/api";
+
+export async function getStaticPaths() {
+  const trainings = await getTrainings();
+  return trainings.flatMap((training) =>
+    training.lessons.map((lesson) => ({
+      params: {
+        trainingSlug: training.slug,
+        lessonSlug: lesson.slug,
+      },
+      props: {
+        training,
+      },
+    })),
+  );
+}
+---
+```
+
+¿Qué hacemos aquí?
+
+- Obtenemos todos los cursos con sus lecciones (ojo lecciones está en un array dentro de cada curso).
+
+- Usamos `flatMap` para crear un array de objetos con las rutas posibles, donde cada objeto tiene los parámetros `trainingSlug` y `lessonSlug`.
+
+¿Por qué `flatMap`? Porque queremos aplanar el array de lecciones de cada curso en un único array de rutas.
+
+Ok, ya tenems generados todas las rutas posibles, ahora vamos a ir montando cada página:
+
+_src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
+
+```diff
+}
+
++ const { training } = Astro.props;
++ const currentLesson = training.lessons.find(
++  (lesson) => lesson.slug === Astro.params.lessonSlug
++ );
+---
+```
+
+Vamos ahora a mostrar los datos de la lección, de momento sin diseño.
+
+> Poner esto despes de las "rejas" (_fences_)
+
+_src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
+
+```astro
+<Layout title={training.title}>
+  <div class="container mx-auto px-4">
+    <h1 class="text-2xl font-bold mb-4">{currentLesson?.title}</h1>
+    <p>{currentLesson?.content}</p>
+  </div>
+</Layout>
+```
+
+### Listado de lecciones con diseño
+
+Ahora que tenemos los datos, vamos a darle un poco de diseño a la página de lecciones.
+
+Primer componentizamos, ¿Qué queremos mostar?
+
+- El video de la lección
+- El listado de lecciones
+- El contenido de la lección
+
+Así que manos a la obra:
+
+_./src/components/training/video.astro_
+
+```astro
+---
+export interface Props {
+  videoUrl: string;
+  title: string;
+}
+
+const { videoUrl, title } = Astro.props;
+---
+
+<div
+  class="aspect-video w-full rounded-2xl overflow-hidden shadow-lg border border-gray-200"
+>
+  <iframe
+    id="videoFrame"
+    src={videoUrl}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    class="w-full h-full"></iframe>
+</div>
+<h2 id="lessonTitle" class="mt-4 text-2xl font-semibold">{title}</h2>
+```
+
+El listado de lecciones:
+
+_./src/components/training/lessons-list.astro_
+
+```astro
+---
+import type { Lesson } from "./training.model";
+
+export interface Props {
+  lessons: Lesson[];
+  trainingSlug: string;
+  currentLessonSlug?: string;
+}
+
+const { lessons, trainingSlug, currentLessonSlug } = Astro.props;
+---
+
+<div
+  class="bg-white rounded-2xl shadow-md p-4 space-y-2 border border-gray-200"
+>
+  <h3 class="text-lg font-medium mb-2 text-gray-800">Lessons</h3>
+  {
+    lessons.map((lesson) => (
+      <a
+        href={`/training/${trainingSlug}/lesson/${lesson.slug}`}
+        class={`block w-full text-left px-4 py-2 rounded-lg transition text-sm border ${
+          lesson.slug === currentLessonSlug
+            ? "bg-gray-100 text-blue-600 font-semibold"
+            : "text-gray-700 hover:bg-gray-100 hover:border-gray-300"
+        }`}
+      >
+        {lesson.title}
+      </a>
+    ))
+  }
+</div>
+```
+
+Y el contenido en markdown sobre la lección:
+
+_./src/components/training/lesson-content.astro_
+
+```astro
+---
+export interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+---
+
+<h3 class="text-xl font-bold mb-4 text-gray-800">Contenido de la Lección</h3>
+<p id="lessonContent" class="text-gray-700 leading-relaxed text-base">
+  {content}
+</p>
+```
+
+Y ahora vamos a montar la página de lecciones, eliminamos el HTML que teníamos y lo sustituimos por nuestros componentes.
+
+_./src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
+
+```astro
+<Layout title={`${training.title} - ${currentLesson.title}`}>
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-center">{training.title}</h1>
+
+    <div class="grid md:grid-cols-12 gap-6">
+      <div class="md:col-span-8">
+        <VideoComponent
+          videoUrl={currentLesson.video}
+          title={currentLesson.title}
+        />
+      </div>
+
+      <div class="md:col-span-4">
+        <LessonsComponent
+          lessons={lessons}
+          trainingSlug={training.slug}
+          currentLessonSlug={currentLesson.slug}
+        />
+      </div>
+    </div>
+
+    <div
+      class="mt-10 bg-white p-6 rounded-2xl shadow-md border border-gray-200"
+    >
+      <LessonContentComponent content={currentLesson.content} />
+    </div>
+  </div>
+</Layout>
+```

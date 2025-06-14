@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getTrainings } from "@/api";
+
+export async function getStaticPaths() {
+  const trainings = await getTrainings();
+  return trainings.flatMap((training) =>
+    training.lessons.map((lesson) => ({
+      params: {
+        trainingSlug: training.slug,
+        lessonSlug: lesson.slug,
+      },
+      props: {
+        training,
+      },
+    })),
+  );
+}
+
+const { training } = Astro.props;
+const currentLesson = training.lessons.find(
+  (lesson) => lesson.slug === Astro.params.lessonSlug,
+);
+---
+
+<Layout title={training.title}>
+  <div class="container mx-auto px-4">
+    <h1 class="text-2xl font-bold mb-4">{currentLesson?.title}</h1>
+    <p>{currentLesson?.content}</p>
+  </div>
+</Layout>
