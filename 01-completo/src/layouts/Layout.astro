@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 // Let's import tailwind's global styles
 import "../styles/global.css";
 import Header from "../components/header.astro";
@@ -17,6 +18,7 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body>
     <Header />

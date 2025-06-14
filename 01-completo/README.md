@@ -470,3 +470,41 @@ import { getTrainings } from "@/api";
   </div>
 </Layout>
 ```
+
+Si hacemos un `npm run build`, podemos ver que se han generado todas las páginas de cursos y lecciones.
+
+```bash
+npm run build
+```
+
+_./dis/training/..._
+
+## Navegación fluida
+
+Vale esto está muy bien, pero si pinchamos en un curso y luego en una lección, la página se recarga, ¿No sería mejor que no se recargara y que tuvieramos un experiencia más tipo SPA con transiciones suaves entre páginas?
+
+Para ello vamos a usar la navegación fluida de Astro, que nos permite navegar entre páginas sin recargar la página completa.
+
+Queremos hacerlo a nivel de sitio, así que vamos a modificar nuestro layout para que use la navegación fluida.
+
+_./src/layouts/Layout.astro_
+
+```diff
+---
++ import { ClientRouter } from "astro:transitions";
+// Let's import tailwind's global styles
+import "../styles/global.css";
+import Header from "../components/header.astro";
+```
+
+```diff
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
++    <ClientRouter />
+  </head>
+```
