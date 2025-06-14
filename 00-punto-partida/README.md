@@ -1,6 +1,6 @@
-# Astro Starter Kit: Minimal
+# Punto de partida para Open South Code
 
-Este es el punto de partida para la sesión de Open Sout Code, que trae:
+Este es el punto de partida para la sesión de Open South Code, que trae:
 
 - Un proyecto Astro con TypeScript.
 - La configuración de Prettier para Astro.

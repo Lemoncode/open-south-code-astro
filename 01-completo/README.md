@@ -6,7 +6,7 @@ Si abrimos la página `index.astro`, podemos ver que trae todo lo típico de una
 
 Podríamos trabajar así, pero sabes que, .... que normalmente en todas las páginas vamos a usar una estructura simiar, es más seguro que cabecera y footer van a ser iguales, ¿Porque no crearnos un layout?
 
-_./src/layouts/Layout.astro_
+_./src/layouts/layout.astro_
 
 ```astro
 ---
@@ -34,7 +34,7 @@ _./src/pages/index.astro_
 
 ```astro
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/layout.astro";
 ---
 
 <Layout>
@@ -135,7 +135,7 @@ const { title } = Astro.props;
 
 Vamos a sacar la lista de cursos pero sin aplicar ningún diseño.
 
-./src/index.astro
+./src/pages/index.astro
 
 ```diff
 ---
@@ -220,7 +220,7 @@ _./src/index.astro_
 ```diff
 ---
 import Layout from "../layouts/Layout.astro";
-+ import TrainingCard from "@/components/trainings/training-card.component.astro";
++ import TrainingCard from "@/components/trainings/training-card.astro";
 import { getTrainings } from "./trainings";
 
 const trainings = await getTrainings();
@@ -265,7 +265,8 @@ Así lo que hacemos es crear todas las lecciones de un curso en una misma carpet
 _src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
 
 ```astro
-
+---
+---
 ```
 
 Ahora nos hace falta hacer como Dr. Strange en infinity War y sacar todas las combinaciones posibles de lecciones y cursos.
@@ -276,7 +277,7 @@ _src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
 
 ```astro
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from "@/layouts/layout.astro";
 import { getTrainings } from "@/api";
 
 export async function getStaticPaths() {
