@@ -1,6 +1,6 @@
 # 03 Listado de cursos básico
 
-Vamos a mostrar el listado de cursos que tenemos dispoinibles.
+Vamos a mostrar el listado de cursos que tenemos disponibles.
 
 Tiramos de los datos de Content Island, que es un headless CMS, y nos permite gestionar los contenidos de forma sencilla.
 
