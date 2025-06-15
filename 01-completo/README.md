@@ -478,7 +478,7 @@ Si hacemos un `npm run build`, podemos ver que se han generado todas las página
 npm run build
 ```
 
-_./dis/training/..._
+_./dist/training/..._
 
 ## Navegación fluida
 
