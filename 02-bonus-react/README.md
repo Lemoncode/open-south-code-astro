@@ -33,34 +33,6 @@ export default defineConfig({
 });
 ```
 
-# Opcional por si no hay soporte a JSX
-
-Y vamos a ver si tenemos en el tsconfig soporte para JSX:
-
-_./tsconfig.json_
-
-```diff
-{
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-+    "jsx": "react-jsx",
-+    "jsxImportSource": "react",
-    "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
-    "skipLibCheck": true
-  },
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
-}
-```
-
-Vamos a rearrancar Astro para que coja los cambios:
-
-```bash
-npm run dev
-```
-
 Vamos ahora a crear un componente de React, que muestro un botón con un pulgar paraa arriba y un contador de likes.
 
 _./src/components/like-button.component.tsx_
