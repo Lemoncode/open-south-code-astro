@@ -33,42 +33,16 @@ export default defineConfig({
 });
 ```
 
-# Opcional por si no hay soporte a JSX
+Vamos ahora a crear un componente de React, que muestro un botón con un pulgar para arriba y un contador de likes.
 
-Y vamos a ver si tenemos en el tsconfig soporte para JSX:
-
-_./tsconfig.json_
-
-```diff
-{
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-+    "jsx": "react-jsx",
-+    "jsxImportSource": "react",
-    "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
-    "skipLibCheck": true
-  },
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
-}
-```
-
-Vamos a rearrancar Astro para que coja los cambios:
-
-```bash
-npm run dev
-```
-
-Vamos ahora a crear un componente de React, que muestro un botón con un pulgar paraa arriba y un contador de likes.
+> Ojo esto es un componente tonto, estamos guardando un valor en local storage, es para ver que un componente de React se integra.
 
 _./src/components/like-button.component.tsx_
 
 ```tsx
 import { useState, useEffect } from "react";
 
-const Like: React.FC = () => {
+export const Like: React.FC = () => {
   const [likes, setLikes] = useState<number>(0);
 
   useEffect(() => {
@@ -99,8 +73,6 @@ const Like: React.FC = () => {
     </button>
   );
 };
-
-export default Like;
 ```
 
 Y ahora vamos usarlo en las lecciones de los cursos:
@@ -114,7 +86,7 @@ import { getTrainings } from "@/api";
 import VideoComponent from "@/components/training/video.astro";
 import LessonsComponent from "@/components/training/lessons-list.astro";
 import LessonContentComponent from "@/components/training/lesson-content.astro";
-+ import Like from "@/components/like-button.component";
++ import {Like} from "@/components/like-button.component";
 ```
 
 ```diff

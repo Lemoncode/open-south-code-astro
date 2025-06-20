@@ -1,10 +1,18 @@
 # Ejemplo completo
 
+## 00 Presentando
+
+Vamos a presentar el ejemplo con Quick Mock [Open South Code 2025] Material.
+
+Vamos a presentar paso 0 que lleva el proyecto semilla.
+
+Vamos a ponernos a implementarlo.
+
 ## 01 Definiendo el layout
 
 Si abrimos la página `index.astro`, podemos ver que trae todo lo típico de una página HTML, con su `head`, `body`, etc.
 
-Podríamos trabajar así, pero sabes que, .... que normalmente en todas las páginas vamos a usar una estructura simiar, es más seguro que cabecera y footer van a ser iguales, ¿Porque no crearnos un layout?
+Podríamos trabajar así, pero sabes que, .... que normalmente en todas las páginas vamos a usar una estructura similar, es más seguro que cabecera y footer van a ser iguales, ¿Porque no crearnos un layout?
 
 _./src/layouts/layout.astro_
 
@@ -87,7 +95,7 @@ _./src/pages/index.astro_
  </Layout>
 ```
 
-Ya que estamos, vamos a añdir un componente de cabecera, que nos muestre el título de la página y un menú de navegación.
+Ya que estamos, vamos a añdir un componente de cabecera, esto podría tener a futuro un menú y otras secciones.
 
 _./src/components/header.astro_
 
@@ -111,7 +119,7 @@ _./src/layouts/Layout.astro_
 ---
 // IMPORTANTE Mencionar esto !!
 import "../styles/global.css";
-+ import Header from "../components/header.astro";
++ import Header from "@/components/header.astro";
 
 interface Props {
   title: string;
@@ -269,7 +277,7 @@ _src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
 ---
 ```
 
-Ahora nos hace falta hacer como Dr. Strange en infinity War y sacar todas las combinaciones posibles de lecciones y cursos.
+Ahora nos hace falta hacer como Dr. Strange en infinity Wars y sacar todas las combinaciones posibles de lecciones y cursos.
 
 Para hacer esto, Astro nos ofrece la función `getStaticPaths`, que nos permite generar todas las rutas posibles para una página dinámica.
 
@@ -411,6 +419,8 @@ const { lessons, trainingSlug, currentLessonSlug } = Astro.props;
 
 Y el contenido en markdown sobre la lección:
 
+> Ojo de momento lo mostramos en plano
+
 _./src/components/training/lesson-content.astro_
 
 ```astro
@@ -478,7 +488,7 @@ Si hacemos un `npm run build`, podemos ver que se han generado todas las página
 npm run build
 ```
 
-_./dis/training/..._
+_./dist/training/..._
 
 ## Navegación fluida
 
