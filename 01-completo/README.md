@@ -277,7 +277,7 @@ _src/pages/training/[trainingSlug]/[lessonSlug]/index.astro_
 ---
 ```
 
-Ahora nos hace falta hacer como Dr. Strange en infinity War y sacar todas las combinaciones posibles de lecciones y cursos.
+Ahora nos hace falta hacer como Dr. Strange en infinity Wars y sacar todas las combinaciones posibles de lecciones y cursos.
 
 Para hacer esto, Astro nos ofrece la función `getStaticPaths`, que nos permite generar todas las rutas posibles para una página dinámica.
 
