@@ -419,6 +419,8 @@ const { lessons, trainingSlug, currentLessonSlug } = Astro.props;
 
 Y el contenido en markdown sobre la lección:
 
+> Ojo de momento lo mostramos en plano
+
 _./src/components/training/lesson-content.astro_
 
 ```astro
