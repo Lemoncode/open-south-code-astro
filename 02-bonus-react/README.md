@@ -40,7 +40,7 @@ _./src/components/like-button.component.tsx_
 ```tsx
 import { useState, useEffect } from "react";
 
-const Like: React.FC = () => {
+export const Like: React.FC = () => {
   const [likes, setLikes] = useState<number>(0);
 
   useEffect(() => {
@@ -71,8 +71,6 @@ const Like: React.FC = () => {
     </button>
   );
 };
-
-export default Like;
 ```
 
 Y ahora vamos usarlo en las lecciones de los cursos:
