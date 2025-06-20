@@ -33,7 +33,9 @@ export default defineConfig({
 });
 ```
 
-Vamos ahora a crear un componente de React, que muestro un botón con un pulgar paraa arriba y un contador de likes.
+Vamos ahora a crear un componente de React, que muestro un botón con un pulgar para arriba y un contador de likes.
+
+> Ojo esto es un componente tonto, estamos guardando un valor en local storage, es para ver que un componente de React se integra.
 
 _./src/components/like-button.component.tsx_
 
