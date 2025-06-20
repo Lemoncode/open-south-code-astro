@@ -111,7 +111,7 @@ _./src/layouts/Layout.astro_
 ---
 // IMPORTANTE Mencionar esto !!
 import "../styles/global.css";
-+ import Header from "../components/header.astro";
++ import Header from "@/components/header.astro";
 
 interface Props {
   title: string;
