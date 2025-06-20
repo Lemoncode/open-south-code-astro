@@ -4,7 +4,7 @@
 
 Si abrimos la página `index.astro`, podemos ver que trae todo lo típico de una página HTML, con su `head`, `body`, etc.
 
-Podríamos trabajar así, pero sabes que, .... que normalmente en todas las páginas vamos a usar una estructura simiar, es más seguro que cabecera y footer van a ser iguales, ¿Porque no crearnos un layout?
+Podríamos trabajar así, pero sabes que, .... que normalmente en todas las páginas vamos a usar una estructura similar, es más seguro que cabecera y footer van a ser iguales, ¿Porque no crearnos un layout?
 
 _./src/layouts/layout.astro_
 
