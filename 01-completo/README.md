@@ -1,5 +1,13 @@
 # Ejemplo completo
 
+## 00 Presentando
+
+Vamos a presentar el ejemplo con Quick Mock [Open South Code 2025] Material.
+
+Vamos a presentar paso 0 que lleva el proyecto semilla.
+
+Vamos a ponernos a implementarlo.
+
 ## 01 Definiendo el layout
 
 Si abrimos la página `index.astro`, podemos ver que trae todo lo típico de una página HTML, con su `head`, `body`, etc.
