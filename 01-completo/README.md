@@ -87,7 +87,7 @@ _./src/pages/index.astro_
  </Layout>
 ```
 
-Ya que estamos, vamos a añdir un componente de cabecera, que nos muestre el título de la página y un menú de navegación.
+Ya que estamos, vamos a añdir un componente de cabecera, esto podría tener a futuro un menú y otras secciones.
 
 _./src/components/header.astro_
 
