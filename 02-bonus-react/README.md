@@ -84,7 +84,7 @@ import { getTrainings } from "@/api";
 import VideoComponent from "@/components/training/video.astro";
 import LessonsComponent from "@/components/training/lessons-list.astro";
 import LessonContentComponent from "@/components/training/lesson-content.astro";
-+ import Like from "@/components/like-button.component";
++ import {Like} from "@/components/like-button.component";
 ```
 
 ```diff
